@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>WebSocket Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="presence-room.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="chat">
+        <strong style="color:green">Usuários ativos:</strong>
+        <ul id="users">
+            <!--  -->
+        </ul>
+        <span id="active-user"></span>
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $().presenceRoom({
+                user: {
+                    id: 1,
+                    name: 'carlos',
+                    room: 1,
+                },
+                socketUrl: 'http://192.168.0.14:3000',
+                setUser: (user) => {
+                    $('#users').append(`
+                        <li id="presence-user-${user.id}" class="user" data-id="${user.id}" style="color:${user.color}">
+                            ${user.name}
+                        </li>`
+                    );
+                },
+                removeUser: (user) => {
+                    let userElement = $(`#presence-user-${user.id}`);
+                    if (userElement.length) userElement.remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
