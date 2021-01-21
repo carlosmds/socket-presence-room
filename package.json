@@ -26,6 +26,6 @@
     "pino-pretty": "^4.0.0",
     "randomcolor": "^0.5.4",
     "redis": "^3.0.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   }
 }
